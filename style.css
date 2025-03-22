@@ -1,1 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Высота на весь экран */
+    display: flex;
+    flex-direction: column; /* Располагаем элементы вертикально */
+    justify-content: center; /* Центрирование по вертикали */
+    align-items: center; /* Центрирование по горизонтали */
+    background-image: url('sourses/image.png'); /* Путь к вашей картинке */
+    background-size: cover; /* Растягиваем картинку на весь фон */
+    background-position: center; /* Центрируем картинку */
+    background-repeat: no-repeat; /* Запрещаем повторение картинки */
+}
 
+.header {
+    text-align: center; /* Центрирование текста заголовка */
+    margin-bottom: 20px; /* Отступ между заголовком и контентом */
+}
+
+.header h1 {
+    color: white; /* Цвет текста заголовка */
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон для заголовка */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 5px; /* Закругленные углы */
+}
+
+.content {
+    text-align: center; /* Центрирование текста внутри блока */
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон для контента */
+    padding: 20px;
+    border-radius: 10px; /* Закругленные углы */
+    max-width: 600px; /* Максимальная ширина контентного блока */
+}
+
+
+#filters {
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 10px; /* Закругленные углы */
+    margin: 20px 20px;
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+}
+
+#filters button {
+    padding: 5px 10px;
+    background-color: #001eff; /* Синий цвет кнопок */
+    color: white; /* Белый текст */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Размер текста */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета при наведении */
+}
+
+#filters button:hover {
+    background-color: #010838; /* Темно-синий при наведении */
+}
+
+#filters button:active {
+    transform: scale(0.95); /* Уменьшение размера кнопки при нажатии */
+}
+
+.delete {
+    margin: 10px 20px;
+}
+.delete button {
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; 
+    color:white;
+    border: none;
+    background-color: #ff0000; /* Темно-синий при наведении */
+}
+
+.delete button:hover {
+    background-color: #7c0707; /* Темно-синий при наведении */
+}
+
+.delete button:active {
+    transform: scale(0.95); /* Уменьшение размера кнопки при нажатии */
+}

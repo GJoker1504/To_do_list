@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>TO DO LIST</h1>
+    </div>
 
+    <div id="filters">
+        <button id="showAll">Все</button>
+        <button id="showActive">Активные</button>
+        <button id="showCompleted">Выполненные</button>
+    </div>
+
+    <div class="content">
+        <!-- Поле для ввода задачи -->
+        <input type="text" id="taskInput" placeholder="Введите задачу">
+        <button id="addTaskButton">Добавить</button>
+
+        <!-- Список задач -->
+        <ul id="taskList">
+            
+        </ul>
+
+        
+    </div>
+
+    <div class="delete">
+        <button id="clearCompleted">Очистить выполненные</button>
+    </div>
+</body>
+</html>
