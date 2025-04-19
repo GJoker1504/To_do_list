@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Данные с Google Карт - Таганрог</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #results { margin-top: 20px; }
+    .category { margin-bottom: 15px; padding: 10px; background: #f0f8ff; border-radius: 5px; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Количество объектов в Таганроге (Google Maps)</h1>
+  <input type="text" id="apiKey" placeholder="AIzaSyAcmMf--741XUKY8mQQc3Wmtkd-c7A3o6Q" style="width: 300px;">
+  <button id="fetchData">Получить данные</button>
+  <div id="results"></div>
+
+  <script>
+    const placeTypes = {
+      "АЗС": {
+        type: "gas_station",
+        keyword: "заправка,азс,fuel"
+      },
+      "Почта": {
+        type: "post_office",
+        keyword: "почта,почтовое отделение"
+      },
+      "Пляж": {
+        type: "",
+        keyword: "пляж,beach"
+      }
+    };
+
+    document.getElementById('fetchData').addEventListener('click', async () => {
+      const apiKey = document.getElementById('apiKey').value;
+      if (!apiKey) {
+        alert("Введите API ключ!");
+        return;
+      }
+
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '<p>Загрузка данных с Google Maps...</p>';
+
+      const center = { lat: 47.2362, lng: 38.8969 }; // Координаты Таганрога
+      const radius = 5000; // 5 км радиус
+
+      for (const [category, params] of Object.entries(placeTypes)) {
+        try {
+          let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?` +
+                   `location=${center.lat},${center.lng}&radius=${radius}&` +
+                   `key=${apiKey}`;
+          
+          if (params.type) url += `&type=${params.type}`;
+          if (params.keyword) url += `&keyword=${params.keyword}`;
+
+          const response = await fetch(url);
+          const data = await response.json();
+          
+          if (data.status === "OK") {
+            resultsDiv.innerHTML += `
+              <div class="category">
+                <h3>${category}</h3>
+                <p>Найдено объектов: <strong>${data.results.length}</strong></p>
+                ${data.results.length > 0 ? 
+                  `<small>Пример: ${data.results[0].name}</small>` : ''}
+              </div>
+            `;
+          } else {
+            resultsDiv.innerHTML += `
+              <div class="category error">
+                <h3>${category}</h3>
+                <p>Ошибка: ${data.status} - ${data.error_message || ''}</p>
+              </div>
+            `;
+          }
+        } catch (error) {
+          resultsDiv.innerHTML += `
+            <div class="category error">
+              <h3>${category}</h3>
+              <p>Ошибка запроса</p>
+            </div>
+          `;
+          console.error(`Ошибка для ${category}:`, error);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
